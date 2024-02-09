@@ -1,9 +1,12 @@
-import BackgroundBanner from "@/(components)/home/banner";
+import Banner from "@/components/home/banner";
+import OpeningHour from "@/components/home/openingHour";
+
+
 export default function Home() {
   return (
-    <main>
-      <BackgroundBanner />
-
+    <main className="max-w-[1800px]">
+      <Banner />
+      <OpeningHour />
     </main>
   );
 }
