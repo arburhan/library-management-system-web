@@ -3,3 +3,14 @@
     background-color: hsla(0, 0%, 100%, 0.685);
     position: absolute;
 }
+
+.deptBanner {
+    background: linear-gradient(43deg, rgb(65, 88, 208) 0%, rgb(200, 80, 192) 46%, rgb(255, 204, 112) 100%);
+    backdrop-filter: blur(20px);
+}
+
+.deptBanner:hover {
+    background: transparent;
+    backdrop-filter: blur(20px);
+    transition: all 0.6s;
+}

@@ -1,0 +1,37 @@
+[
+    {
+        "_id": 1,
+        "name": "CSE",
+        "status": "ON"
+    },
+    {
+        "_id": 2,
+        "name": "EEE",
+        "status": "ON"
+    },
+    {
+        "_id": 3,
+        "name": "Pharmacy",
+        "status": "ON"
+    },
+    {
+        "_id": 4,
+        "name": "Public Health",
+        "status": "ON"
+    },
+    {
+        "_id": 5,
+        "name": "Political Science",
+        "status": "ON"
+    },
+    {
+        "_id": 6,
+        "name": "English",
+        "status": "ON"
+    },
+    {
+        "_id": 7,
+        "name": "Law",
+        "status": "ON"
+    }
+]
