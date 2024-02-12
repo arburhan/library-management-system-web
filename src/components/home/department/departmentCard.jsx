@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React from 'react';
 import styles from '../../../../styles.module.css';
 import SemesterModal from './semesterModal';
 import { useDisclosure } from '@nextui-org/react';

@@ -2,7 +2,7 @@ import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from
 import React from 'react';
 
 const SemesterModal = ({ isOpen, onClose }) => {
-    const semestersList = [1, 2, 3, 4, 5, 6, 7, 8];
+    const semestersList = ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th"];
     return (
         <Modal backdrop='blur' isOpen={isOpen} onClose={onClose}>
             <ModalContent>
