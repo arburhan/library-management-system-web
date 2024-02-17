@@ -1,0 +1,51 @@
+[
+    {
+        "_id": 1,
+        "name": "Algorithms",
+        "dept": "CSE",
+        "semester": 1,
+        "shelf": 1
+    },
+    {
+        "_id": 2,
+        "name": "Hydrolix",
+        "dept": "EEE",
+        "semester": 1,
+        "shelf": 1
+    },
+    {
+        "_id": 3,
+        "name": "Programming in C",
+        "dept": "Pharmacy",
+        "semester": 2,
+        "shelf": 1
+    },
+    {
+        "_id": 4,
+        "name": "Mental Pressure",
+        "dept": "Public Health",
+        "semester": 5,
+        "shelf": 1
+    },
+    {
+        "_id": 5,
+        "name": "Which is better for human",
+        "dept": "Political Science",
+        "semester": 4,
+        "shelf": 1
+    },
+    {
+        "_id": 6,
+        "name": "Easy english",
+        "dept": "English",
+        "semester": 1,
+        "shelf": 1
+    },
+    {
+        "_id": 7,
+        "name": "Is law for all",
+        "dept": "Law",
+        "semester": 3,
+        "shelf": 1
+    }
+]
