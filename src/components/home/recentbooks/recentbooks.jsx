@@ -13,11 +13,9 @@ const Recentbooks = ({ page = false }) => {
                     recentbooks.map(book => <RecentbooksCard key={book._id} book={book} />)
                 }
             </div>
-            <div className={`text-center ${page == true ? "hidden" : "block"} py-2`}>
-                <Link href="/recentbooks" prefetch>
-                    <Button radius="xl" className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg text-md p-4">
-                        All recent books
-                    </Button>
+            <div className={`text-center ${page == true ? "hidden" : "block"} py-5`}>
+                <Link href='/recentbooks' className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg text-md p-3 rounded-xl">
+                    All recent books
                 </Link>
             </div>
         </section>
