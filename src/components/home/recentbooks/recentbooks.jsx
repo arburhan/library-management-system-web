@@ -14,7 +14,7 @@ const Recentbooks = ({ page = false }) => {
                 }
             </div>
             <div className={`text-center ${page == true ? "hidden" : "block"} py-2`}>
-                <Link href="/recentbooks">
+                <Link href="/recentbooks" prefetch>
                     <Button radius="xl" className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg text-md p-4">
                         All recent books
                     </Button>

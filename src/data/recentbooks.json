@@ -11,21 +11,21 @@
         "name": "Hydrolix",
         "dept": "EEE",
         "semester": 1,
-        "shelf": 1
+        "shelf": 5
     },
     {
         "_id": 3,
         "name": "Programming in C",
         "dept": "Pharmacy",
         "semester": 2,
-        "shelf": 1
+        "shelf": 4
     },
     {
         "_id": 4,
         "name": "Mental Pressure",
         "dept": "Public Health",
         "semester": 5,
-        "shelf": 1
+        "shelf": 2
     },
     {
         "_id": 5,
