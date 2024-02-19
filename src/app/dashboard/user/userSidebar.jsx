@@ -2,8 +2,8 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
-import ProfileDashboard from './ProfileDashboard';
-import Historytable from './historytable';
+import ProfileDashboard from './profile/ProfileDashboard';
+import Historytable from './profile/historytable';
 
 export default function UserSidebar() {
     const [isOpen, setIsOpen] = useState(false);
