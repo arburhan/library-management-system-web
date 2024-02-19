@@ -2,7 +2,8 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
-import DataTable from './table';
+import ProfileDashboard from './ProfileDashboard';
+import Historytable from './historytable';
 
 export default function UserSidebar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -34,7 +35,11 @@ export default function UserSidebar() {
                 </ul>
             </div>
             <div className="w-full bg-gray-300 p-4 pt-16">
-                <DataTable />
+                <ProfileDashboard />
+                <div>
+                    <h2 className='pl-3 text-xl py-2 text-black '>Borowed History:</h2>
+                    <Historytable />
+                </div>
             </div>
         </div>
     );

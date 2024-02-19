@@ -48,7 +48,7 @@ const columns = [
     },
 ];
 
-export default function DataTable() {
+export default function Historytable() {
     return (
         <Table aria-label="Example table with dynamic content">
             <TableHeader columns={columns}>
