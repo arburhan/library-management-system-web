@@ -1,18 +1,34 @@
-'use client'
-import Link from 'next/link';
-import { useState } from 'react';
-import { AiOutlineMenu } from 'react-icons/ai';
-import ProfileDashboard from './dashboardProfile/ProfileDashboard';
-import Historytable from './dashboardProfile/historytable';
+"use client"
+import { AiOutlineMenu } from "react-icons/ai";
+import Link from "next/link";
+import { useState } from "react";
 
-export default function UserSidebar() {
+export default function DashboardLayout({ children }) {
     const [isOpen, setIsOpen] = useState(false);
     const userMenu = [
-        "Profile", "Whitelist", "Borrowed", "Due Now"
+        {
+            _id: 1,
+            name: "Profile",
+            url: ""
+        },
+        {
+            _id: 2,
+            name: "Whitelist",
+            url: "whitelist"
+        },
+        {
+            _id: 3,
+            name: "Borowed",
+            url: "borowed"
+        },
+        {
+            _id: 4,
+            name: "Due Now",
+            url: "duebooks"
+        },
     ]
-
     return (
-        <div className="flex h-screen bg-black">
+        <section className="flex h-screen bg-black">
             <button onClick={() => setIsOpen(!isOpen)} className="text-black text-3xl sm:hidden absolute top-0 right-0 m-6 z-30">
                 <AiOutlineMenu />
             </button>
@@ -28,19 +44,17 @@ export default function UserSidebar() {
                 <ul className="mt-6">
                     {
                         userMenu.map(menu => (
-                            <li key={menu} className=" mx-3 mb-2 rounded-xl cursor-pointer px-6 py-2 hover:bg-[#002d61] transition-all duration-150 active:scale-[0.98]">
-                                <Link href="/menu" > {menu} </Link>
+                            <li key={menu._id} className=" mx-3 mb-2 rounded-xl cursor-pointer px-6 py-2 hover:bg-[#181a1b] transition-all duration-150 active:scale-[0.98]">
+                                <Link href={`/dashboard/user/${menu.url}`} > {menu.name} </Link>
                             </li>))
                     }
                 </ul>
             </div>
-            <div className="w-full bg-gray-300 p-4 pt-16">
-                <ProfileDashboard />
-                <div>
-                    <h2 className='pl-3 text-xl py-2 text-black '>Borowed History:</h2>
-                    <Historytable />
-                </div>
+            <div className="m-2 md:ml-8 md:fex" >
+                {
+                    children
+                }
             </div>
-        </div>
-    );
+        </section>
+    )
 }
