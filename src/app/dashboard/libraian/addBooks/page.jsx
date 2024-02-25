@@ -4,6 +4,7 @@ import { Input } from "@nextui-org/react";
 
 const AddBooks = () => {
     const [bookName, setBookName] = useState("");
+    const [bookISBN, setBookISBN] = useState("");
     const [writerName, setWriterName] = useState("");
     const [pubName, setPubName] = useState("");
     const [deptName, setDeptName] = useState("");
@@ -21,6 +22,10 @@ const AddBooks = () => {
                 <div>
                     <span className='lebel text-xs ml-2'>Books Name</span>
                     <Input className='w-full' required type="name" variant="bordered" label="Book Name" onValueChange={setBookName} />
+                </div>
+                <div>
+                    <span className='lebel text-xs ml-2'>Books ISBN</span>
+                    <Input className='w-full' required type="name" variant="bordered" label="ISBN" onValueChange={setBookISBN} />
                 </div>
                 <div>
                     <span className='lebel text-xs ml-2'>Writer Name</span>

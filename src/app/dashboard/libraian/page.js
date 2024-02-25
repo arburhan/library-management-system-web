@@ -1,5 +1,6 @@
 import { Avatar } from '@nextui-org/react';
 import React from 'react';
+import Lendbook from './lendbook';
 
 const page = () => {
     return (
@@ -10,6 +11,7 @@ const page = () => {
                 <h3>Account type: <span>Libraian</span> </h3>
                 <p>Staus: Active</p>
             </div>
+            <Lendbook />
         </section>
     );
 };
