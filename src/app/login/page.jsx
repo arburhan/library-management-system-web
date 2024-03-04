@@ -1,8 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 'use client'
-import React, { useMemo, useState } from 'react';
+import React from 'react';
 import { Button, Input } from "@nextui-org/react";
-import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import Title from '@/components/shared/title';
 import Link from 'next/link';
 import { useForm } from "react-hook-form";
@@ -24,6 +23,7 @@ const page = () => {
             <Title name={"Login"} />
             <div className='flex flex-col items-center'>
                 <form className=' w-full  md:w-[400px] px-4 md:px-2' onSubmit={handleSubmit(onSubmit)}>
+                    {/* email */}
                     <div>
                         <div className="label ml-2 pb-1">
                             <span className="text-[14px]">Email</span>
@@ -45,6 +45,7 @@ const page = () => {
                             {errors.email && <small className='text-red-500 ml-1' >{errors.email.message}</small >}
                         </div>
                     </div>
+                    {/* password */}
                     <div className='py-2'>
                         <div className="label ml-2 pb-1">
                             <span className="text-[14px]">Password</span>

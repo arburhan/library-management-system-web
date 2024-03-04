@@ -1,52 +1,88 @@
 'use client'
-import { Input } from '@nextui-org/react';
-import React, { useState } from 'react';
+import { Button, Input } from '@nextui-org/react';
+import React from 'react';
+import { useForm } from 'react-hook-form';
 
 const Lendbook = () => {
-    const [bookISBN, setBookISBN] = useState("");
-    const [studentID, setStudentID] = useState("");
-    const [selectedDate, setSelectedDate] = useState(null);
-    const [error, setError] = useState(null);
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Reset error
-        setError(null);
+    const onSubmit = data => {
+        console.log(data);
+    };
+    // Get the date 3 days from now
+    const threeDaysFromNow = new Date();
+    threeDaysFromNow.setDate(threeDaysFromNow.getDate() + 3);
+    const minDate = `${threeDaysFromNow.getFullYear()}-${String(threeDaysFromNow.getMonth() + 1).padStart(2, '0')}-${String(threeDaysFromNow.getDate()).padStart(2, '0')}`;
 
-        // Check if all fields are filled
-        if (!bookISBN || !studentID || !selectedDate) {
-            setError('All fields are required');
-            return;
-        }
-        // Check if selected date is at least 3 days after today
-        const today = new Date();
-        const minimumDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 3);
-        if (new Date(selectedDate) < minimumDate) {
-            setError('Please select a date at least 3 days from today');
-            return;
-        }
-
-        // Continue with form submission
-        console.log('Form submitted');
-    }
     return (
-        <section>
-            <form className='flex flex-col md:grid md:grid-cols-2 md:gap-x-6 md:gap-y-4' onSubmit={handleSubmit}>
-                <div>
-                    <span className='lebel text-xs ml-2'>Books ISBN</span>
-                    <Input className='w-full' required type="name" variant="bordered" label="ISBN" onValueChange={setBookISBN} />
+        <section className='py-3 md:py-10' >
+            <form className='flex flex-col md:grid md:grid-cols-2 md:gap-x-6 md:gap-y-4' onSubmit={handleSubmit(onSubmit)}>
+                {/*book isbn */}
+                <div className="w-full">
+                    <div className="label ml-2 pb-1">
+                        <span className="text-[14px]">Book ISBN</span>
+                    </div>
+                    <div>
+                        <Input
+                            type="isbn"
+                            label="ISBN"
+                            variant="bordered"
+                            className="w-full "
+                            {...register('bookISBN', {
+                                required: 'ISBN is required'
+                            })}
+                        />
+                        {errors.bookISBN && <small className='text-red-500 ml-1' >{errors.bookISBN.message}</small >}
+                    </div>
                 </div>
+                {/* email */}
                 <div>
-                    <span className='lebel text-xs ml-2'>Student ID</span>
-                    <Input className='w-full' required type="email" variant="bordered" label="ID" onValueChange={setStudentID} />
+                    <div className="label ml-2 pb-1">
+                        <span className="text-[14px]">Email</span>
+                    </div>
+                    <div>
+                        <Input
+                            type="email"
+                            label="Email"
+                            variant="bordered"
+                            {...register('email', {
+                                required: 'Email is required',
+                                pattern: {
+                                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                                    message: 'Invalid email address'
+                                }
+                            })}
+                            className="w-full max-w-md"
+                        />
+                        {errors.email && <small className='text-red-500 ml-1' >{errors.email.message}</small >}
+                    </div>
                 </div>
-                <div>
-                    <span className='lebel text-xs ml-2'>Lend time</span>
-                    <Input className='w-full' required type="date" variant="bordered" onValueChange={setSelectedDate} />
+                {/*lend time*/}
+                <div className="w-full">
+                    <div className="label ml-2 pb-1">
+                        <span className="text-[14px]">Lend time</span>
+                    </div>
+                    <div>
+                        <Input
+                            type="date"
+                            variant="bordered"
+                            className="w-full "
+                            min={minDate}
+                            {...register('lendTime', {
+                                required: 'lend time is required',
+                                validate: value => new Date(value) >= threeDaysFromNow || 'Please select a date at least 3 days from today'
+                            })}
+                        />
+                        {errors.lendTime && <small className='text-red-500 ml-1' >{errors.lendTime.message}</small >}
+                    </div>
                 </div>
-                {error && <p className="text-red-500">{error}</p>}
-                <input type='submit' value="Lend Book" className='button bg-primary-500 p-3 rounded-lg cursor-pointer' />
-
+                <Button type="submit" radius="md" className='mt-4 w-full bg-primary-500 md:h-20'>
+                    Lend book
+                </Button>
             </form>
         </section>
     );
