@@ -34,7 +34,7 @@ const layout = ({ children }) => {
         },
     ]
     return (
-        <section className="flex md:flex-row md:basis-1/2 h-screen bg-black">
+        <section className="flex flex-col px-1 md:flex-row md:basis-1/2 h-screen bg-black">
             <button onClick={() => setIsOpen(!isOpen)} className="text-black text-3xl sm:hidden absolute top-0 right-0 m-6 z-30">
                 <AiOutlineMenu />
             </button>

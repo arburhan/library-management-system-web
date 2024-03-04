@@ -1,64 +1,188 @@
 'use client'
-import React, { useState } from 'react';
-import { Input } from "@nextui-org/react";
+import React from 'react';
+import { Button, Input } from "@nextui-org/react";
+import { useForm } from 'react-hook-form';
+import Title from '@/components/shared/title';
 
 const AddBooks = () => {
-    const [bookName, setBookName] = useState("");
-    const [bookISBN, setBookISBN] = useState("");
-    const [writerName, setWriterName] = useState("");
-    const [pubName, setPubName] = useState("");
-    const [deptName, setDeptName] = useState("");
-    const [shelfNum, setShelfNum] = useState(0);
-    const [semester, setSemesterNum] = useState("");
-    const [stock, setStock] = useState(0);
-    const [commonName, setCommonName] = useState("");
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log("book name: ", bookName);
-    }
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
+
+    const onSubmit = data => {
+        console.log(data);
+    };
     return (
         <section>
-            <form className='flex flex-col md:grid md:grid-cols-2 md:gap-x-6 md:gap-y-4' onSubmit={handleSubmit}>
-                <div>
-                    <span className='lebel text-xs ml-2'>Books Name</span>
-                    <Input className='w-full' required type="name" variant="bordered" label="Book Name" onValueChange={setBookName} />
+            <Title name={"Add books"} />
+            <form className='flex flex-col px-3 gap-y-2 md:grid md:grid-cols-2 md:gap-x-6 md:gap-y-4' onSubmit={handleSubmit(onSubmit)}>
+                {/* book name  */}
+                <div className="w-full">
+                    <div className="label ml-2 pb-1">
+                        <span className="text-[14px]">Name</span>
+                    </div>
+                    <div>
+                        <Input
+                            type="name"
+                            label="Book name"
+                            variant="bordered"
+                            className="w-full "
+                            {...register('bookName', {
+                                required: 'Name is required'
+                            })}
+                        />
+                        {errors.bookName && <small className='text-red-500 ml-1' >{errors.bookName.message}</small >}
+                    </div>
                 </div>
-                <div>
-                    <span className='lebel text-xs ml-2'>Books ISBN</span>
-                    <Input className='w-full' required type="name" variant="bordered" label="ISBN" onValueChange={setBookISBN} />
+                {/* isbn */}
+                <div className="w-full">
+                    <div className="label ml-2 pb-1">
+                        <span className="text-[14px]">ISBN</span>
+                    </div>
+                    <div>
+                        <Input
+                            type="isbn"
+                            label="ISBN"
+                            variant="bordered"
+                            className="w-full "
+                            {...register('bookISBN', {
+                                required: 'ISBN is required'
+                            })}
+                        />
+                        {errors.bookISBN && <small className='text-red-500 ml-1' >{errors.bookISBN.message}</small >}
+                    </div>
                 </div>
-                <div>
-                    <span className='lebel text-xs ml-2'>Writer Name</span>
-                    <Input className='w-full' required type="name" variant="bordered" label="Writer" onValueChange={setWriterName} />
+                {/* writer name */}
+                <div className="w-full">
+                    <div className="label ml-2 pb-1">
+                        <span className="text-[14px]">Writer Name</span>
+                    </div>
+                    <div>
+                        <Input
+                            type="name"
+                            label="Writer Name"
+                            variant="bordered"
+                            className="w-full "
+                            {...register('writerName', {
+                                required: 'Writer name is required'
+                            })}
+                        />
+                        {errors.writerName && <small className='text-red-500 ml-1' >{errors.writerName.message}</small >}
+                    </div>
                 </div>
-                <div>
-                    <span className='lebel text-xs ml-2'>Publicatoin Name</span>
-                    <Input className='w-full' required type="name" variant="bordered" label="Publicatoin" onValueChange={setPubName} />
+                {/* pub name */}
+                <div className="w-full">
+                    <div className="label ml-2 pb-1">
+                        <span className="text-[14px]">Publication Name</span>
+                    </div>
+                    <div>
+                        <Input
+                            type="name"
+                            label="publication"
+                            variant="bordered"
+                            className="w-full "
+                            {...register('pubName', {
+                                required: 'Publication Name is required'
+                            })}
+                        />
+                        {errors.pubName && <small className='text-red-500 ml-1' >{errors.pubName.message}</small >}
+                    </div>
                 </div>
-                <div>
-                    <span className='lebel text-xs ml-2'>Deparment Name</span>
-                    <Input className='w-full' required type="name" variant="bordered" label="Department" onValueChange={setDeptName} />
+                {/* deptName */}
+                <div className="w-full">
+                    <div className="label ml-2 pb-1">
+                        <span className="text-[14px]">Department Name</span>
+                    </div>
+                    <div>
+                        <Input
+                            type="department"
+                            label="Department"
+                            variant="bordered"
+                            className="w-full "
+                            {...register('deptName', {
+                                required: 'Department Name is required'
+                            })}
+                        />
+                        {errors.deptName && <small className='text-red-500 ml-1' >{errors.deptName.message}</small >}
+                    </div>
                 </div>
-                <div>
-                    <span className='lebel text-xs ml-2'>Semester</span>
-                    <Input className='w-full' required type="number" variant="bordered" label="Semester" onValueChange={setSemesterNum} />
+                {/* shelfNum */}
+                <div className="w-full">
+                    <div className="label ml-2 pb-1">
+                        <span className="text-[14px]">Shelf Number</span>
+                    </div>
+                    <div>
+                        <Input
+                            type="number"
+                            label="Shelf"
+                            variant="bordered"
+                            className="w-full "
+                            {...register('shelfNum', {
+                                required: 'Shelf number is required'
+                            })}
+                        />
+                        {errors.shelfNum && <small className='text-red-500 ml-1' >{errors.shelfNum.message}</small >}
+                    </div>
                 </div>
-                <div>
-                    <span className='lebel text-xs ml-2'>Shelf Number</span>
-                    <Input className='w-full' required type="number" variant="bordered" label="Shelf" onValueChange={setShelfNum} />
+                {/* semester */}
+                <div className="w-full">
+                    <div className="label ml-2 pb-1">
+                        <span className="text-[14px]">Semester</span>
+                    </div>
+                    <div>
+                        <Input
+                            type="number"
+                            label="Semester"
+                            variant="bordered"
+                            className="w-full "
+                            {...register('semester', {
+                                required: 'Semester is required'
+                            })}
+                        />
+                        {errors.semester && <small className='text-red-500 ml-1' >{errors.semester.message}</small >}
+                    </div>
                 </div>
-                <div>
-                    <span className='lebel text-xs ml-2'>Stock</span>
-                    <Input className='w-full' required type="number" variant="bordered" label="Stock" onValueChange={setStock} />
+                {/* stock */}
+                <div className="w-full">
+                    <div className="label ml-2 pb-1">
+                        <span className="text-[14px]">Stock</span>
+                    </div>
+                    <div>
+                        <Input
+                            type="number"
+                            label="Stock"
+                            variant="bordered"
+                            className="w-full "
+                            {...register('stock', {
+                                required: 'Stock is required'
+                            })}
+                        />
+                        {errors.stock && <small className='text-red-500 ml-1' >{errors.stock.message}</small >}
+                    </div>
                 </div>
-                <div>
-                    <span className='lebel text-xs ml-2'>Common Status</span>
-                    <Input type="name" variant="bordered" label="Common" onValueChange={setCommonName} />
-                    <span className='lebel text-xs ml-2 text-warning-300'>Its not required</span>
+                {/* common optional */}
+                <div className="w-full">
+                    <div className="label ml-2 pb-1">
+                        <span className="text-[14px]">Common status</span>
+                    </div>
+                    <div>
+                        <Input
+                            type="boolean"
+                            label="status"
+                            variant="bordered"
+                            className="w-full "
+                            {...register('commonName', {
+                                required: 'Common status is required'
+                            })}
+                        />
+                        {errors.commonName && <small className='text-red-500 ml-1' >{errors.commonName.message}</small >}
+                    </div>
                 </div>
-
-                <input type='submit' value="Add Book" className='button bg-primary-500 p-3 rounded-lg cursor-pointer' />
-
+                <Button type="submit" radius="md" className='mt-4 w-full md:h-20'>
+                    Add book
+                </Button>
             </form>
 
         </section>
