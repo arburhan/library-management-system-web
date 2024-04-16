@@ -1,8 +1,9 @@
 'use client'
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Input } from "@nextui-org/react";
 import { useForm } from 'react-hook-form';
 import Title from '@/components/shared/title';
+import Image from 'next/image';
 
 const AddBooks = () => {
     const {
@@ -12,10 +13,39 @@ const AddBooks = () => {
     } = useForm();
 
     const onSubmit = data => {
-        console.log(data);
+        //console.log(data);
+
+        const selectedFile = data.image[0];
+        console.log("Selected file:", selectedFile);
+        if (selectedFile) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const imageData = e.target.result;
+                const dataURL = `data:image/jpeg;base64,${btoa(imageData)}`;
+                console.log(dataURL);
+            };
+            reader.readAsBinaryString(selectedFile);
+        }
+    };
+
+
+    const [previewImage, setPreviewImage] = useState(null);
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+
+        reader.onloadend = () => {
+            setPreviewImage(reader.result);
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            setPreviewImage(null);
+        }
     };
     return (
-        <section>
+        <section className='py-2'>
             <Title name={"Add books"} />
             <form className='flex flex-col px-3 gap-y-2 md:grid md:grid-cols-2 md:gap-x-6 md:gap-y-4' onSubmit={handleSubmit(onSubmit)}>
                 {/* book name  */}
@@ -180,11 +210,36 @@ const AddBooks = () => {
                         {errors.commonName && <small className='text-red-500 ml-1' >{errors.commonName.message}</small >}
                     </div>
                 </div>
-                <Button type="submit" radius="md" className='mt-4 w-full md:h-20'>
+                {/* image */}
+                <div>
+                    <label className="label">
+                        <span className="label-text text-black">Image</span>
+                    </label>
+                    <Input
+                        type="file"
+                        accept="image/*"
+                        className="input input-bordered w-full max-w-md border-[#B7B7B7] bg-white"
+                        {...register("image", {
+                            required: {
+                                value: true,
+                                message: 'Image is Required'
+                            },
+                            pattern: {
+                                value: /\.(jpeg|jpg|png)$/i,
+                                message: 'Provide a jpeg, jpg or png image format'
+                            }
+                        })}
+                        onBlur={handleImageChange}
+                    />
+                    {previewImage &&
+                        <Image width={100} height={100} src={previewImage} alt="Preview" />
+                    }
+                    {errors.image && <small className='text-red-500 ml-1' >{errors.image.message}</small >}
+                </div>
+                <Button type="submit" radius="md" className='mt-4 w-full md:h-16'>
                     Add book
                 </Button>
             </form>
-
         </section>
     );
 };
