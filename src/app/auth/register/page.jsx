@@ -4,27 +4,65 @@ import React from 'react';
 import { Button, Input } from "@nextui-org/react";
 import Title from '@/components/shared/title';
 import Link from 'next/link';
-import { useForm } from "react-hook-form";
+import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
 
 const page = () => {
     const {
         register,
         handleSubmit,
+        reset,
+        setError,
         formState: { errors },
     } = useForm();
+    const router = useRouter();
 
-    const onSubmit = data => {
+    const onSubmit = async data => {
         console.log(data);
+        const url = process.env.NEXT_PUBLIC_API_URL + `/user`;
+        const res = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+        if (res.ok) {
+            setMessage("User registered succesfully.")
+            reset()
+            setMessage("Login in now");
+            router.replace("/auth/login");
+        } else {
+            const response = await res.json();
+            setError('email', { message: response?.detail ?? "User Registration Failed", type: "error" })
+        }
     };
-
-
     return (
-        <section className='h-screen'>
-            <Title name={"Login"} />
+        <section className='h-screen '>
+            <Title name={"Create new account"} />
             <div className='flex flex-col items-center'>
-                <form className=' w-full  md:w-[400px] px-4 md:px-2' onSubmit={handleSubmit(onSubmit)}>
-                    {/* email */}
+                <form className='w-full  md:w-[400px] px-4 md:px-2' onSubmit={handleSubmit(onSubmit)}>
+                    {/* name field */}
                     <div>
+                        <div className="label ml-2 pb-1">
+                            <span className="text-[14px]">Name</span>
+                        </div>
+                        <div>
+                            <Input
+                                type="name"
+                                label="Name"
+                                variant="bordered"
+                                className="w-full max-w-md"
+                                {...register('name', {
+                                    required: 'Name is required'
+                                })}
+                            />
+                            {errors.name && <small className='text-red-500 ml-1' >{errors.name.message}</small >}
+                        </div>
+                    </div>
+                    {/* email */}
+                    <div className='py-2'>
                         <div className="label ml-2 pb-1">
                             <span className="text-[14px]">Email</span>
                         </div>
@@ -46,7 +84,7 @@ const page = () => {
                         </div>
                     </div>
                     {/* password */}
-                    <div className='py-2'>
+                    <div>
                         <div className="label ml-2 pb-1">
                             <span className="text-[14px]">Password</span>
                         </div>
@@ -67,15 +105,12 @@ const page = () => {
                             {errors.password && <small className='text-red-500 ml-1' >{errors.password.message}</small >}
                         </div>
                     </div>
-                    <div className="label ml-2">
-                        <span className="text-[14px] cursor-pointer text-warning-500">Forget Password?</span>
-                    </div>
                     <Button type="submit" radius="md" className='mt-4 w-full'>
-                        Login
+                        Signup
                     </Button>
                 </form>
                 <div className="label ml-2 p-1">
-                    <span className="text-[14px]">New Here? <Link href='/signup'><span className='cursor-pointer text-orange-200 hover:text-warning-500'>Sign up Now</span></Link> </span>
+                    <span className="text-[14px]">Already Account? <Link href='/auth/login'><span className='cursor-pointer text-orange-200 hover:text-warning-500'>Login now</span></Link> </span>
                 </div>
                 <div>
                 </div>

@@ -4,43 +4,44 @@ import React from 'react';
 import { Button, Input } from "@nextui-org/react";
 import Title from '@/components/shared/title';
 import Link from 'next/link';
-import { useForm } from 'react-hook-form';
+import { useForm } from "react-hook-form";
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 const page = () => {
     const {
         register,
         handleSubmit,
+        setError,
         formState: { errors },
     } = useForm();
-
-    const onSubmit = data => {
+    const router = useRouter();
+    const onSubmit = async data => {
         console.log(data);
+        try {
+            const res = await signIn("credentials", {
+                email: data.email,
+                password: data.password,
+                redirect: false
+            });
+            if (res.error) {
+                setError("Invalid credentials");
+                return;
+            }
+            router.replace("/");
+        } catch (error) {
+            console.log(error);
+        }
     };
+
+
     return (
-        <section className='h-screen '>
-            <Title name={"Create new account"} />
+        <section className='h-screen'>
+            <Title name={"Login"} />
             <div className='flex flex-col items-center'>
-                <form className='w-full  md:w-[400px] px-4 md:px-2' onSubmit={handleSubmit(onSubmit)}>
-                    {/* name field */}
-                    <div>
-                        <div className="label ml-2 pb-1">
-                            <span className="text-[14px]">Name</span>
-                        </div>
-                        <div>
-                            <Input
-                                type="name"
-                                label="Name"
-                                variant="bordered"
-                                className="w-full max-w-md"
-                                {...register('name', {
-                                    required: 'Name is required'
-                                })}
-                            />
-                            {errors.name && <small className='text-red-500 ml-1' >{errors.name.message}</small >}
-                        </div>
-                    </div>
+                <form className=' w-full  md:w-[400px] px-4 md:px-2' onSubmit={handleSubmit(onSubmit)}>
                     {/* email */}
-                    <div className='py-2'>
+                    <div>
                         <div className="label ml-2 pb-1">
                             <span className="text-[14px]">Email</span>
                         </div>
@@ -62,7 +63,7 @@ const page = () => {
                         </div>
                     </div>
                     {/* password */}
-                    <div>
+                    <div className='py-2'>
                         <div className="label ml-2 pb-1">
                             <span className="text-[14px]">Password</span>
                         </div>
@@ -83,12 +84,15 @@ const page = () => {
                             {errors.password && <small className='text-red-500 ml-1' >{errors.password.message}</small >}
                         </div>
                     </div>
+                    <div className="label ml-2">
+                        <span className="text-[14px] cursor-pointer text-warning-500">Forget Password?</span>
+                    </div>
                     <Button type="submit" radius="md" className='mt-4 w-full'>
-                        Signup
+                        Login
                     </Button>
                 </form>
                 <div className="label ml-2 p-1">
-                    <span className="text-[14px]">Already Account? <Link href='/login'><span className='cursor-pointer text-orange-200 hover:text-warning-500'>Login now</span></Link> </span>
+                    <span className="text-[14px]">New Here? <Link href='/auth/register'><span className='cursor-pointer text-orange-200 hover:text-warning-500'>Sign up Now</span></Link> </span>
                 </div>
                 <div>
                 </div>

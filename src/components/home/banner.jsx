@@ -1,10 +1,17 @@
+'use client'
 import React from 'react';
 import Image from 'next/image';
 import bannerImage from '../../../public/images/banner.jpg';
+import { signOut, useSession } from 'next-auth/react';
 
 
 
 const Banner = () => {
+    const { session } = useSession()
+    console.log(session);
+    function handleSignOut() {
+        signOut()
+    }
     return (
         <section className='relative'>
             <div className=''>
