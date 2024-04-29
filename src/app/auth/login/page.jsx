@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useForm } from "react-hook-form";
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 const page = () => {
     const {
@@ -16,8 +17,8 @@ const page = () => {
         formState: { errors },
     } = useForm();
     const router = useRouter();
+
     const onSubmit = async data => {
-        console.log(data);
         try {
             const res = await signIn("credentials", {
                 email: data.email,
@@ -25,7 +26,7 @@ const page = () => {
                 redirect: false
             });
             if (res.error) {
-                setError("Invalid credentials");
+                toast.error("Invalid credentials");
                 return;
             }
             router.replace("/");

@@ -6,6 +6,7 @@ import Title from '@/components/shared/title';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 const page = () => {
     const {
@@ -29,13 +30,13 @@ const page = () => {
             body: JSON.stringify(data)
         });
         if (res.ok) {
-            setMessage("User registered succesfully.")
+            toast("User registered succesfully.")
             reset()
-            setMessage("Login in now");
+            toast("Login in now");
             router.replace("/auth/login");
         } else {
             const response = await res.json();
-            setError('email', { message: response?.detail ?? "User Registration Failed", type: "error" })
+            toast.error('email', { message: response?.detail ?? "User Registration Failed", type: "error" })
         }
     };
     return (

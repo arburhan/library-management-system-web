@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Providers from "@/app/providers";
 import { AuthProvider } from "./authProviders";
+import { Toaster } from "react-hot-toast";
 
 
 
@@ -22,6 +23,7 @@ export default function RootLayout({ children }) {
               {children}
             </Providers>
           </AuthProvider>
+          <Toaster />
         </main>
       </body>
     </html>
