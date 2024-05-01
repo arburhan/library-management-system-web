@@ -93,7 +93,7 @@ const page = () => {
                     </Button>
                 </form>
                 <div className="label ml-2 p-1">
-                    <span className="text-[14px]">New Here? <Link href='/auth/register'><span className='cursor-pointer text-orange-200 hover:text-warning-500'>Sign up Now</span></Link> </span>
+                    <span className="text-[14px]">New Here? <Link href='/register'><span className='cursor-pointer text-orange-200 hover:text-warning-500'>Sign up Now</span></Link> </span>
                 </div>
                 <div>
                 </div>

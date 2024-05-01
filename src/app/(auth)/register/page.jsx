@@ -33,7 +33,7 @@ const page = () => {
             toast.success("User registered succesfully.")
             reset()
             toast("Login in now");
-            router.replace("/auth/login");
+            router.replace("/login");
         } else {
             const response = await res.json();
             toast.error('email', { message: response?.detail ?? "User Registration Failed", type: "error" })
@@ -111,7 +111,7 @@ const page = () => {
                     </Button>
                 </form>
                 <div className="label ml-2 p-1">
-                    <span className="text-[14px]">Already Account? <Link href='/auth/login'><span className='cursor-pointer text-orange-200 hover:text-warning-500'>Login now</span></Link> </span>
+                    <span className="text-[14px]">Already Account? <Link href='/login'><span className='cursor-pointer text-orange-200 hover:text-warning-500'>Login now</span></Link> </span>
                 </div>
                 <div>
                 </div>
