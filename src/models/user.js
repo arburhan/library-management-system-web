@@ -23,9 +23,8 @@ const userSchema = Schema({
     },
     role: {
         type: String,
-        enum: {
-            values: ["librarian", "student"],
-        }
+        enum: ["librarian", "student"],
+        default: "student"
     }
 
 }, {

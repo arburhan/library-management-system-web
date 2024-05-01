@@ -1,10 +1,20 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+
 "use client"
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import { AiOutlineMenu } from 'react-icons/ai';
 
 const layout = ({ children }) => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const { data } = useSession();
+    // console.log(data?.user?.role);
+    if (data?.user?.role !== "librarian") {
+        toast.dismiss('you are gone on hell');
+        redirect('/dashboard/user');
+    }
     const [isOpen, setIsOpen] = useState(false);
     const userMenu = [
         {

@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+'use client'
 import { Avatar } from '@nextui-org/react';
 import React from 'react';
 import Lendbook from './lendbook';

@@ -30,7 +30,7 @@ const page = () => {
             body: JSON.stringify(data)
         });
         if (res.ok) {
-            toast("User registered succesfully.")
+            toast.success("User registered succesfully.")
             reset()
             toast("Login in now");
             router.replace("/auth/login");

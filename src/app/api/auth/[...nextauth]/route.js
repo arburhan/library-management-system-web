@@ -35,12 +35,29 @@ export const authOptions = {
             },
         }),
     ],
+    callbacks: {
+        async session({ session, token }) {
+            if (session.user) {
+                (session.user)._id = token._id;
+                (session.user).role = token.role;
+            }
+            return session;
+        },
+        async jwt({ token, user }) {
+            if (user?.role) {
+                token.role = user.role;
+                token._id = user._id;
+            }
+            return token;
+        }
+    },
     session: {
         strategy: "jwt",
     },
     secret: process.env.NEXTAUTH_SECRET,
     pages: {
         signIn: "/auth/login",
+        newUser: "/auth/register"
     },
 };
 
