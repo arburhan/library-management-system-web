@@ -4,32 +4,67 @@ import { Button, Input } from "@nextui-org/react";
 import { useForm } from 'react-hook-form';
 import Title from '@/components/shared/title';
 import Image from 'next/image';
+import toast from 'react-hot-toast';
 
 const AddBooks = () => {
     const {
         register,
         handleSubmit,
         formState: { errors },
+        reset,
     } = useForm();
 
-    const onSubmit = data => {
-        //console.log(data);
-
+    const [previewImage, setPreviewImage] = useState(null);
+    const onSubmit = async data => {
         const selectedFile = data.image[0];
-        console.log("Selected file:", selectedFile);
+        let imageURL = "";
+
         if (selectedFile) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                const imageData = e.target.result;
-                const dataURL = `data:image/jpeg;base64,${btoa(imageData)}`;
-                console.log(dataURL);
-            };
-            reader.readAsBinaryString(selectedFile);
+            imageURL = await new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const imageData = e.target.result;
+                    const dataURL = `data:image/jpeg;base64,${btoa(imageData)}`;
+                    resolve(dataURL);
+                };
+                reader.onerror = reject;
+                reader.readAsBinaryString(selectedFile);
+            });
+        };
+        const bookData = {
+            bookName: data.bookName,
+            bookISBN: data.bookISBN,
+            writerName: data.writerName,
+            pubName: data.pubName,
+            deptName: data.deptName,
+            shelfNum: data.shelfNum,
+            semester: data.semester,
+            stock: data.stock,
+            commonName: data.commonName,
+            image: imageURL,
+        };
+
+        const url = process.env.NEXT_PUBLIC_API_URL + `/books`;
+        const res = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(bookData)
+        });
+        if (res.ok) {
+            toast.success("books added succesfully.")
+            setPreviewImage(null);
+            reset()
+        } else {
+            const response = await res.json();
+            toast.error('books', { message: response?.detail ?? "books add Failed", type: "error" })
         }
     };
 
 
-    const [previewImage, setPreviewImage] = useState(null);
+
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         const reader = new FileReader();
@@ -215,10 +250,8 @@ const AddBooks = () => {
                     <label className="label">
                         <span className="label-text text-black">Image</span>
                     </label>
-                    <Input
+                    <input
                         type="file"
-                        accept="image/*"
-                        className="input input-bordered w-full max-w-md border-[#B7B7B7] bg-white"
                         {...register("image", {
                             required: {
                                 value: true,
@@ -229,11 +262,9 @@ const AddBooks = () => {
                                 message: 'Provide a jpeg, jpg or png image format'
                             }
                         })}
-                        onBlur={handleImageChange}
-                    />
-                    {previewImage &&
-                        <Image width={100} height={100} src={previewImage} alt="Preview" />
-                    }
+                        onChange={handleImageChange} className="input input-bordered w-full" />
+
+                    {previewImage && <Image src={previewImage} alt="Preview" width={200} height={100} className=" object-cover" />}
                     {errors.image && <small className='text-red-500 ml-1' >{errors.image.message}</small >}
                 </div>
                 <Button type="submit" radius="md" className='mt-4 w-full md:h-16'>

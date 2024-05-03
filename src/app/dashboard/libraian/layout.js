@@ -1,21 +1,28 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 
 "use client"
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { AiOutlineMenu } from 'react-icons/ai';
 
 const layout = ({ children }) => {
-    const { data } = useSession();
-    // console.log(data?.user?.role);
-    if (data?.user?.role !== "librarian") {
-        toast.dismiss('you are gone on hell');
-        redirect('/dashboard/user');
-    }
+    const { data, status } = useSession();
     const [isOpen, setIsOpen] = useState(false);
+
+    useEffect(() => {
+        if (status === 'loading') {
+            return;
+        }
+        if (data?.user?.role !== 'librarian') {
+            redirect('/not-found');
+        }
+    }, [data, status]);
+    if (status === 'loading') {
+        return <div>Loading...</div>;
+    }
     const userMenu = [
         {
             _id: 1,
@@ -42,7 +49,8 @@ const layout = ({ children }) => {
             name: "Due Now",
             url: "duebooks"
         },
-    ]
+    ];
+
     return (
         <section className="flex flex-col px-1 md:flex-row md:basis-1/2 h-screen bg-black">
             <button onClick={() => setIsOpen(!isOpen)} className="text-black text-3xl sm:hidden absolute top-0 right-0 m-6 z-30">
@@ -61,7 +69,9 @@ const layout = ({ children }) => {
                     {
                         userMenu.map(menu => (
                             <li key={menu._id} className=" mx-3 mb-2 rounded-xl cursor-pointer px-6 py-2 hover:bg-[#181a1b] transition-all duration-150 active:scale-[0.98]">
-                                <Link href={`/dashboard/libraian/${menu.url}`} > {menu.name} </Link>
+                                <Link href={`/dashboard/libraian/${menu.url}`}>
+                                    {menu.name}
+                                </Link>
                             </li>))
                     }
                 </ul>

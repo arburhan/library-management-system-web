@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose, { Schema, models } from "mongoose";
 
 // schema design
 const booksSchema = mongoose.Schema({
@@ -60,7 +60,7 @@ booksSchema.methods.logger = function () {
 }
 
 // SCHEMA -> MODEL -> QUERY
-
-const Books = mongoose.model('books', booksSchema)
+//const Books = models.VideoScm || mongoose.model("VideoScm", videoSchema);
+const Books = models.BooksSchema || mongoose.model('booksScma', booksSchema)
 
 module.exports = Books;
