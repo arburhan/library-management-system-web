@@ -46,8 +46,7 @@ const booksSchema = mongoose.Schema({
         type: Boolean,
     },
     image: {
-        type: Buffer,
-        contentType: String
+        type: String,
     },
 }, {
     timestamps: true,
@@ -60,7 +59,14 @@ booksSchema.methods.logger = function () {
 }
 
 // SCHEMA -> MODEL -> QUERY
-//const Books = models.VideoScm || mongoose.model("VideoScm", videoSchema);
-const Books = models.BooksSchema || mongoose.model('booksScma', booksSchema)
+
+// model creation
+let Books;
+
+try {
+    Books = mongoose.model('booksScma');
+} catch (error) {
+    Books = mongoose.model('booksScma', booksSchema);
+}
 
 module.exports = Books;

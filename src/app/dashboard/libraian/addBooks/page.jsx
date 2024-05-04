@@ -18,17 +18,15 @@ const AddBooks = () => {
     const onSubmit = async data => {
         const selectedFile = data.image[0];
         let imageURL = "";
-
+        // convert image to base64
         if (selectedFile) {
             imageURL = await new Promise((resolve, reject) => {
                 const reader = new FileReader();
                 reader.onload = (e) => {
-                    const imageData = e.target.result;
-                    const dataURL = `data:image/jpeg;base64,${btoa(imageData)}`;
-                    resolve(dataURL);
+                    resolve(e.target.result);
                 };
                 reader.onerror = reject;
-                reader.readAsBinaryString(selectedFile);
+                reader.readAsDataURL(selectedFile);
             });
         };
         const bookData = {
@@ -43,7 +41,7 @@ const AddBooks = () => {
             commonName: data.commonName,
             image: imageURL,
         };
-
+        // post data to the server
         const url = process.env.NEXT_PUBLIC_API_URL + `/books`;
         const res = await fetch(url, {
             method: "POST",
@@ -63,8 +61,7 @@ const AddBooks = () => {
         }
     };
 
-
-
+    // preview image
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         const reader = new FileReader();
