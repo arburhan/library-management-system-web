@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="dark">
       <body className={inter.className}>
-        <main>
+        <main className="max-w-[1800px]">
           <AuthProvider>
             <Providers>
               {children}

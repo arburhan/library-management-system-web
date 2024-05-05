@@ -6,7 +6,7 @@ import Recentbooks from "@/components/home/recentbooks/recentbooks";
 
 export default function Home() {
   return (
-    <main className="max-w-[1800px]">
+    <main>
       <Banner />
       <OpeningHour />
       <Departments />

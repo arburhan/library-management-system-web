@@ -21,7 +21,7 @@ const Recentbooks = ({ page = false }) => {
     return (
         <section className='my-6'>
             <Title name={"Recently added books"} />
-            <div className="grid grid-cols-3 gap-3 md:grid md:grid-cols-4 mx-[50px] md:mx-[100px] justify-evenly items-center md:gap-6 my-3">
+            <div className="grid grid-cols-2 gap-4 md:grid md:grid-cols-4 mx-[50px] md:mx-[100px] justify-evenly items-center md:gap-6 my-3">
                 {
                     allBooks.map((book) => {
                         return <RecentbooksCard key={book._id} book={book} />

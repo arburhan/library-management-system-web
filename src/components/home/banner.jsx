@@ -19,8 +19,8 @@ const Banner = () => {
                     }}
                 />
             </div>
-            <div className='absolute bottom-56 left-[400px] flex items-center justify-center'>
-                <div className='bg-[#ffffffb6] p-5 rounded-md text-center w-[500px]'>
+            <div className='absolute bottom-56  flex items-center justify-center'>
+                <div className='bg-[#ffffffb6] p-5 rounded-md text-center w-full md:w-[50%]'>
                     <p className='py-4 text-black' >Distributing high end tools to help create your ideal vision for a project, home, or application. We are your partners, confidants and most importantly your guidance to help you complete projects that matter. </p>
                     <button className='details-btn rounded-full border border-[black] text-black px-8 py-3 hover:bg-[#db011c] hover:ease-linear duration-[.2s] hover:text-white hover:border-[#db011c] text-[12px]' >Show Lecture</button>
                 </div>
