@@ -16,7 +16,7 @@ const DepartmentCard = ({ department, deptImage }) => {
             <Image src={deptImage} width={100} placeholder="blur"
                 quality={100} alt={department} loading='lazy' />
             <h1 className='text-center font-bold'>{department}</h1>
-            <SemesterModal isOpen={isOpen} onClose={onClose} />
+            <SemesterModal department={department} isOpen={isOpen} onClose={onClose} />
         </div>
     );
 };
