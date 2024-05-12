@@ -1,24 +1,14 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-'use client'
 import RecentbooksCard from '@/components/home/recentbooks/recentbooksCard';
-import React, { useEffect, useState } from 'react';
 
-const page = ({ params }) => {
+
+const page = async ({ params }) => {
 
     const { dept, semester } = params;
-    const [data, setData] = useState([]);
     const url = process.env.NEXT_PUBLIC_API_URL + `/books`;
-    useEffect(() => {
-        fetch(url)
-            .then(response => response.json())
-            .then(result => {
-                const filteredData = result.books.filter(book => book.deptName == dept);
-                setData(filteredData);
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-            });
-    }, [url, dept, semester]);
+    const res = await fetch(url);
+    const datas = await res.json();
+    const data = datas.books.filter(book => book.deptName == dept);
 
     return (
         <div>

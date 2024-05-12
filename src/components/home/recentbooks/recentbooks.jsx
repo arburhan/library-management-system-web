@@ -1,21 +1,13 @@
-'use client'
-import React, { useEffect, useState } from 'react';
 import recentbooks from '@/data/recentbooks.json';
 import Title from '../../shared/title';
 import RecentbooksCard from './recentbooksCard';
 import { Button } from '@nextui-org/react';
 import Link from 'next/link';
 import { NavbarComponent } from '@/components/shared/navbar';
-const Recentbooks = ({ page = false }) => {
+const Recentbooks = async ({ page = false }) => {
     const url = process.env.NEXT_PUBLIC_API_URL + `/recentBooks`;
-    const [books, setBooks] = useState([]);
-    useEffect(() => {
-        fetch(url)
-            .then(res => res.json())
-            .then(data => {
-                setBooks(data);
-            })
-    }, [url]);
+    const res = await fetch(url);
+    const books = await res.json();
     const allBooks = books.books ? books.books.slice(0, 8) : [];
 
 
