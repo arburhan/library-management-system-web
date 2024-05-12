@@ -9,7 +9,7 @@ const page = ({ params }) => {
     const [data, setData] = useState([]);
     const url = process.env.NEXT_PUBLIC_API_URL + `/books`;
     useEffect(() => {
-        fetch('http://localhost:3000/api/books')
+        fetch(url)
             .then(response => response.json())
             .then(result => {
                 const filteredData = result.books.filter(book => book.deptName == dept);
@@ -18,7 +18,7 @@ const page = ({ params }) => {
             .catch(error => {
                 console.error('Error fetching data:', error);
             });
-    }, [dept, semester]);
+    }, [url, dept, semester]);
 
     return (
         <div>

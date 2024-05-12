@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
+import { NavbarComponent } from '@/components/shared/navbar';
 
 const page = () => {
     const {
@@ -41,6 +42,7 @@ const page = () => {
     };
     return (
         <section className='h-screen '>
+            <NavbarComponent />
             <Title name={"Create new account"} />
             <div className='flex flex-col items-center'>
                 <form className='w-full  md:w-[400px] px-4 md:px-2' onSubmit={handleSubmit(onSubmit)}>
@@ -52,7 +54,7 @@ const page = () => {
                         <div>
                             <Input
                                 type="name"
-                                label="Name"
+                                /* label="Name" */
                                 variant="bordered"
                                 className="w-full max-w-md"
                                 {...register('name', {
@@ -70,7 +72,7 @@ const page = () => {
                         <div>
                             <Input
                                 type="email"
-                                label="Email"
+                                /* label="Email" */
                                 variant="bordered"
                                 {...register('email', {
                                     required: 'Email is required',
@@ -92,7 +94,7 @@ const page = () => {
                         <div>
                             <Input
                                 type="password"
-                                label="Password"
+                                /* label="Password" */
                                 variant="bordered"
                                 {...register('password', {
                                     required: 'Password is required',
@@ -110,7 +112,7 @@ const page = () => {
                         Signup
                     </Button>
                 </form>
-                <div className="label ml-2 p-1">
+                <div className="label ml-2 p-1 my-4">
                     <span className="text-[14px]">Already Account? <Link href='/login'><span className='cursor-pointer text-orange-200 hover:text-warning-500'>Login now</span></Link> </span>
                 </div>
                 <div>

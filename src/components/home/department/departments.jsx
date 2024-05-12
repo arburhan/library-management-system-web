@@ -6,7 +6,7 @@ import DepartmentData from '@/data/departments.json';
 
 const Departments = () => {
     return (
-        <section>
+        <section id='departments'>
             <Title name={"Departments"} />
             <div className="grid grid-cols-3 gap-3 md:grid md:grid-cols-4 mx-[50px] md:mx-[200px] justify-evenly items-center md:gap-y-6 my-3">
                 {

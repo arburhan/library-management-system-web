@@ -5,6 +5,7 @@ import Title from '../../shared/title';
 import RecentbooksCard from './recentbooksCard';
 import { Button } from '@nextui-org/react';
 import Link from 'next/link';
+import { NavbarComponent } from '@/components/shared/navbar';
 const Recentbooks = ({ page = false }) => {
     const url = process.env.NEXT_PUBLIC_API_URL + `/recentBooks`;
     const [books, setBooks] = useState([]);
@@ -20,6 +21,9 @@ const Recentbooks = ({ page = false }) => {
 
     return (
         <section className='my-6'>
+            {
+                page == true ? <NavbarComponent /> : null
+            }
             <Title name={"Recently added books"} />
             <div className="grid grid-cols-2 gap-4 md:grid md:grid-cols-4 mx-[50px] md:mx-[100px] justify-evenly items-center md:gap-6 my-3">
                 {

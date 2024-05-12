@@ -19,7 +19,7 @@ const OpeningHour = () => {
     }, [days]);
 
     return (
-        <section>
+        <section id='openingHour'>
             <Title name={"Library Schedule"} />
             <div className='flex justify-center items-center gap-x-5 pb-3'>
                 <div>

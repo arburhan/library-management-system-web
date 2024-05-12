@@ -29,7 +29,7 @@ const Lendbook = () => {
                     <div>
                         <Input
                             type="isbn"
-                            label="ISBN"
+                            /* label="ISBN" */
                             variant="bordered"
                             className="w-full "
                             {...register('bookISBN', {
@@ -47,7 +47,7 @@ const Lendbook = () => {
                     <div>
                         <Input
                             type="email"
-                            label="Email"
+                            /* label="Email" */
                             variant="bordered"
                             {...register('email', {
                                 required: 'Email is required',

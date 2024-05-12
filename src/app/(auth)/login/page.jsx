@@ -1,15 +1,17 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 'use client'
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Input } from "@nextui-org/react";
 import Title from '@/components/shared/title';
 import Link from 'next/link';
 import { useForm } from "react-hook-form";
 import { signIn } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
+import { NavbarComponent } from '@/components/shared/navbar';
 
 const page = () => {
+    const pathname = usePathname();
     const {
         register,
         handleSubmit,
@@ -38,6 +40,7 @@ const page = () => {
 
     return (
         <section className='h-screen'>
+            <NavbarComponent />
             <Title name={"Login"} />
             <div className='flex flex-col items-center'>
                 <form className=' w-full  md:w-[400px] px-4 md:px-2' onSubmit={handleSubmit(onSubmit)}>
@@ -49,7 +52,7 @@ const page = () => {
                         <div>
                             <Input
                                 type="email"
-                                label="Email"
+                                /*                                 label="Email" */
                                 variant="bordered"
                                 {...register('email', {
                                     required: 'Email is required',
@@ -71,7 +74,7 @@ const page = () => {
                         <div>
                             <Input
                                 type="password"
-                                label="Password"
+                                /* label="Password" */
                                 variant="bordered"
                                 {...register('password', {
                                     required: 'Password is required',
@@ -92,7 +95,7 @@ const page = () => {
                         Login
                     </Button>
                 </form>
-                <div className="label ml-2 p-1">
+                <div className="label ml-2 p-1 my-4">
                     <span className="text-[14px]">New Here? <Link href='/register'><span className='cursor-pointer text-orange-200 hover:text-warning-500'>Sign up Now</span></Link> </span>
                 </div>
                 <div>
