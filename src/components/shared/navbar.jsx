@@ -1,8 +1,15 @@
 'use client'
 import React from "react";
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar, Button } from "@nextui-org/react";
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link } from "@nextui-org/react";
+import { signOut, useSession } from "next-auth/react";
+import { AiOutlineLogout } from "react-icons/ai";
 
 export function NavbarComponent() {
+    const { data, session } = useSession();
+    const handLeLogout = () => {
+        signOut();
+    }
+    // console.log(data);
     return (
         <Navbar>
             <NavbarBrand>
@@ -29,13 +36,23 @@ export function NavbarComponent() {
                 </NavbarItem>
             </NavbarContent>
 
-            <NavbarContent justify="end">
-                <NavbarItem>
-                    <Link href='/login' className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg text-md py-2 px-8 rounded-xl">
-                        login
-                    </Link>
-                </NavbarItem>
-            </NavbarContent>
+            {
+                data ? <NavbarContent justify="end">
+                    <NavbarItem>
+                        <Link onClick={handLeLogout} className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg text-md py-2 px-8 rounded-xl cursor-pointer">
+                            logout <AiOutlineLogout />
+                        </Link>
+                    </NavbarItem>
+                </NavbarContent> :
+                    <NavbarContent justify="end">
+                        <NavbarItem>
+                            <Link href='/login' className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg text-md py-2 px-8 rounded-xl">
+                                login
+                            </Link>
+                        </NavbarItem>
+                    </NavbarContent>
+
+            }
         </Navbar>
     );
 }

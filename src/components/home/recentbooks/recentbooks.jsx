@@ -1,14 +1,21 @@
-import recentbooks from '@/data/recentbooks.json';
 import Title from '../../shared/title';
 import RecentbooksCard from './recentbooksCard';
-import { Button } from '@nextui-org/react';
 import Link from 'next/link';
 import { NavbarComponent } from '@/components/shared/navbar';
+import toast from 'react-hot-toast';
+
+const url = process.env.NEXT_PUBLIC_API_URL + `/books?limit=8&sort=-createdAt`;
+async function getData() {
+    const res = await fetch(url)
+    if (!res.ok) {
+        toast.error('Failed to fetch data')
+    }
+    return res.json()
+}
+
 const Recentbooks = async ({ page = false }) => {
-    const url = process.env.NEXT_PUBLIC_API_URL + `/recentBooks`;
-    const res = await fetch(url);
-    const books = await res.json();
-    const allBooks = books.books ? books.books.slice(0, 8) : [];
+    const books = await getData();
+    const allBooks = books.books;
 
 
     return (

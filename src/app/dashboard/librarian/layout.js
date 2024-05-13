@@ -69,7 +69,7 @@ const layout = ({ children }) => {
                     {
                         userMenu.map(menu => (
                             <li key={menu._id} className=" mx-3 mb-2 rounded-xl cursor-pointer px-6 py-2 hover:bg-[#181a1b] transition-all duration-150 active:scale-[0.98]">
-                                <Link href={`/dashboard/libraian/${menu.url}`}>
+                                <Link href={`/dashboard/librarian/${menu.url}`}>
                                     {menu.name}
                                 </Link>
                             </li>))
