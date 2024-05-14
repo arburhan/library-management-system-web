@@ -2,17 +2,19 @@ import Banner from '@/components/home/banner';
 import Departments from '@/components/home/department/departments';
 import OpeningHour from '@/components/home/openingHour';
 import Recentbooks from '@/components/home/recentbooks/recentbooks';
+import { NavbarComponent } from '@/components/shared/navBar';
 import React from 'react';
 
-const Home = () => {
+const HomeComponent = () => {
     return (
-        <div>
+        <section>
+            <NavbarComponent />
             <Banner />
             <OpeningHour />
             <Departments />
             <Recentbooks />
-        </div>
+        </section>
     );
 };
 
-export default Home;
+export default HomeComponent;

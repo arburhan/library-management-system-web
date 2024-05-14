@@ -1,24 +1,20 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-'use client'
+
 import RecentbooksCard from '@/components/home/recentbooks/recentbooksCard';
-import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+const url = process.env.NEXT_PUBLIC_API_URL + `/books`;
+async function getData() {
+    const res = await fetch(url)
+    if (!res.ok) {
+        toast.error('Failed to fetch data')
+    }
+    return res.json()
+}
 
-const page = ({ params }) => {
-
+const page = async ({ params }) => {
     const { dept, semester } = params;
-    const [data, setData] = useState([]);
-    const url = process.env.NEXT_PUBLIC_API_URL + `/books`;
-    useEffect(() => {
-        fetch('http://localhost:3000/api/books')
-            .then(response => response.json())
-            .then(result => {
-                const filteredData = result.books.filter(book => book.deptName == dept);
-                setData(filteredData);
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-            });
-    }, [dept, semester]);
+    const books = await getData();
+    const data = books.books.filter(book => book.deptName == dept);
 
     return (
         <div>
