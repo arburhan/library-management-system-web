@@ -52,7 +52,7 @@ const page = () => {
                         <div>
                             <Input
                                 type="name"
-                                label="Name"
+
                                 variant="bordered"
                                 className="w-full max-w-md"
                                 {...register('name', {
