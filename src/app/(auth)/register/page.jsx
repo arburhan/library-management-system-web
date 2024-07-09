@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
-import { NavbarComponent } from '@/components/shared/navbar';
+
 
 const page = () => {
     const {
@@ -41,7 +41,7 @@ const page = () => {
     };
     return (
         <section className='h-screen '>
-            <NavbarComponent />
+            
             <Title name={"Create new account"} />
             <div className='flex flex-col items-center'>
                 <form className='w-full  md:w-[400px] px-4 md:px-2' onSubmit={handleSubmit(onSubmit)}>
