@@ -18,9 +18,6 @@ const Recentbooks = async ({ page = false }) => {
 
     return (
         <section className='my-6'>
-            {
-                page == true ? <NavbarComponent /> : null
-            }
             <Title name={"Recently added books"} />
             <div className="grid grid-cols-2 gap-4 md:grid md:grid-cols-4 mx-[50px] md:mx-[100px] justify-evenly items-center md:gap-6 my-3">
                 {

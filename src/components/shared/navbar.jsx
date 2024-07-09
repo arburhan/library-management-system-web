@@ -1,58 +1,42 @@
 'use client'
 import React from "react";
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link } from "@nextui-org/react";
-import { signOut, useSession } from "next-auth/react";
-import { AiOutlineLogout } from "react-icons/ai";
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button } from "@nextui-org/react";
 
-export function NavbarComponent() {
-    const { data, session } = useSession();
-    const handLeLogout = () => {
-        signOut();
-    }
-    // console.log(data);
+
+export default function NavbarComponent() {
     return (
-        <Navbar>
+        <Navbar shouldHideOnScroll>
             <NavbarBrand>
-                <Link href="/" color="foreground" className="text-xl">
-                    AR Library
-                </Link>
-            </NavbarBrand>
 
+                <p className="font-bold text-inherit">ACME</p>
+            </NavbarBrand>
             <NavbarContent className="hidden sm:flex gap-4" justify="center">
                 <NavbarItem>
-                    <Link href="/#openingHour">
-                        Schedule
+                    <Link color="foreground" href="/">
+                        Features
+                    </Link>
+                </NavbarItem>
+                <NavbarItem isActive>
+                    <Link href="/" aria-current="page">
+                        Customers
                     </Link>
                 </NavbarItem>
                 <NavbarItem>
-                    <Link href="/#departments" aria-current="page" color="foreground" >
-                        Departments
-                    </Link>
-                </NavbarItem>
-                <NavbarItem>
-                    <Link color="foreground" href="/recentbooks">
-                        Recent Books
+                    <Link color="foreground" href="/">
+                        Integrations
                     </Link>
                 </NavbarItem>
             </NavbarContent>
-
-            {
-                data ? <NavbarContent justify="end">
-                    <NavbarItem>
-                        <Link onClick={handLeLogout} className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg text-md py-2 px-8 rounded-xl cursor-pointer">
-                            logout <AiOutlineLogout />
-                        </Link>
-                    </NavbarItem>
-                </NavbarContent> :
-                    <NavbarContent justify="end">
-                        <NavbarItem>
-                            <Link href='/login' className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg text-md py-2 px-8 rounded-xl">
-                                login
-                            </Link>
-                        </NavbarItem>
-                    </NavbarContent>
-
-            }
+            <NavbarContent justify="end">
+                <NavbarItem className="hidden lg:flex">
+                    <Link href="/">Login</Link>
+                </NavbarItem>
+                <NavbarItem>
+                    <Button as={Link} color="primary" href="/" variant="flat">
+                        Sign Up
+                    </Button>
+                </NavbarItem>
+            </NavbarContent>
         </Navbar>
     );
 }

@@ -53,7 +53,6 @@ const page = () => {
                         <div>
                             <Input
                                 type="name"
-
                                 variant="bordered"
                                 className="w-full max-w-md"
                                 {...register('name', {
@@ -71,7 +70,6 @@ const page = () => {
                         <div>
                             <Input
                                 type="email"
-
                                 variant="bordered"
                                 {...register('email', {
                                     required: 'Email is required',
@@ -93,7 +91,6 @@ const page = () => {
                         <div>
                             <Input
                                 type="password"
-
                                 variant="bordered"
                                 {...register('password', {
                                     required: 'Password is required',
