@@ -16,13 +16,14 @@ const layout = ({ children }) => {
         if (status === 'loading') {
             return;
         }
-        if (data?.user?.role !== 'librarian') {
+        if (data?.user?.role != 'librarian') {
             redirect('/not-found');
         }
     }, [data, status]);
     if (status === 'loading') {
         return <div>Loading...</div>;
     }
+
     const userMenu = [
         {
             _id: 1,

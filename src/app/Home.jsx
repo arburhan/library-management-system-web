@@ -8,7 +8,7 @@ import React from 'react';
 const HomeComponent = () => {
     return (
         <section>
-            <NavbarComponent />
+            {/* <NavbarComponent /> */}
             <Banner />
             <OpeningHour />
             <Departments />

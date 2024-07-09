@@ -10,7 +10,7 @@ const RecentbooksCard = ({ book }) => {
       <CardBody className="overflow-visible p-0">
         <Image
           alt="Card background"
-          className="object-cover rounded-xl h-48 md:h-52 p-0"
+          className="object-cover rounded-xl h-48 md:h-60 p-0"
           src={image}
           height={270}
           width={270}

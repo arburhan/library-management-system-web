@@ -2,9 +2,12 @@
 import React from 'react';
 import Image from 'next/image';
 import bannerImage from '../../../public/images/banner.jpg';
+import { useSession } from 'next-auth/react';
 
 
 const Banner = () => {
+    const { data, session } = useSession();
+
     return (
         <section className='relative'>
             <div className=''>

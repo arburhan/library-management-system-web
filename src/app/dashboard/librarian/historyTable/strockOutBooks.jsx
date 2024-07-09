@@ -7,29 +7,29 @@ const rows = [
         key: "1",
         name: "Algorithms",
         writer: "Jane Fisher",
-        status: "Complete",
         submitData: "10/02/2024",
+        stock: 0
     },
     {
         key: "2",
         name: "Data Structure",
         writer: "Technical Lead",
-        status: "Due",
         submitData: "10/02/2024",
+        stock: 0
     },
     {
         key: "3",
         name: "Programming in C",
         writer: "Jane Fisher",
-        status: "Complete",
         submitData: "10/02/2024",
+        stock: 0
     },
     {
         key: "4",
         name: "OOP in cpp",
         writer: "Community Manager",
-        status: "Due",
         submitData: "10/02/2024",
+        stock: 0
     },
 ];
 
@@ -43,12 +43,12 @@ const columns = [
         label: "Writer",
     },
     {
-        key: "status",
-        label: "STATUS",
+        key: "stock",
+        label: "Stock",
     },
 ];
 
-export default function StrockOutBooks() {
+export default function Historytable() {
     return (
         <Table aria-label="Example table with dynamic content">
             <TableHeader columns={columns}>

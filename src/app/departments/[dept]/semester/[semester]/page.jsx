@@ -1,7 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 
 import RecentbooksCard from '@/components/home/recentbooks/recentbooksCard';
-import { toast } from 'react-toastify';
+import toast from 'react-hot-toast';
+
 const url = process.env.NEXT_PUBLIC_API_URL + `/books`;
 async function getData() {
     const res = await fetch(url)
