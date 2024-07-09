@@ -52,7 +52,7 @@ const page = () => {
                         <div>
                             <Input
                                 type="email"
-                                /*                                 label="Email" */
+
                                 variant="bordered"
                                 {...register('email', {
                                     required: 'Email is required',
@@ -74,7 +74,7 @@ const page = () => {
                         <div>
                             <Input
                                 type="password"
-                                /* label="Password" */
+
                                 variant="bordered"
                                 {...register('password', {
                                     required: 'Password is required',

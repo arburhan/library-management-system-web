@@ -88,7 +88,7 @@ const AddBooks = () => {
                     <div>
                         <Input
                             type="name"
-                            /* label="Book name" */
+                            label="Book name"
                             variant="bordered"
                             className="w-full "
                             {...register('bookName', {
@@ -106,7 +106,7 @@ const AddBooks = () => {
                     <div>
                         <Input
                             type="isbn"
-                            /* label="ISBN" */
+                            label="ISBN"
                             variant="bordered"
                             className="w-full "
                             {...register('bookISBN', {
@@ -124,7 +124,7 @@ const AddBooks = () => {
                     <div>
                         <Input
                             type="name"
-                            /* label="Writer Name" */
+                            label="Writer Name"
                             variant="bordered"
                             className="w-full "
                             {...register('writerName', {
@@ -142,7 +142,7 @@ const AddBooks = () => {
                     <div>
                         <Input
                             type="name"
-                            /* label="publication" */
+                            label="publication"
                             variant="bordered"
                             className="w-full "
                             {...register('pubName', {
@@ -160,7 +160,7 @@ const AddBooks = () => {
                     <div>
                         <Input
                             type="department"
-                            /* label="Department" */
+                            label="Department"
                             variant="bordered"
                             className="w-full "
                             {...register('deptName', {
@@ -178,7 +178,7 @@ const AddBooks = () => {
                     <div>
                         <Input
                             type="number"
-                            /* label="Shelf" */
+                            label="Shelf"
                             variant="bordered"
                             className="w-full "
                             {...register('shelfNum', {
@@ -196,7 +196,7 @@ const AddBooks = () => {
                     <div>
                         <Input
                             type="number"
-                            /* label="Semester" */
+                            label="Semester"
                             variant="bordered"
                             className="w-full "
                             {...register('semester', {
@@ -214,7 +214,7 @@ const AddBooks = () => {
                     <div>
                         <Input
                             type="number"
-                            /* label="Stock" */
+                            label="Stock"
                             variant="bordered"
                             className="w-full "
                             {...register('stock', {
@@ -232,7 +232,7 @@ const AddBooks = () => {
                     <div>
                         <Input
                             type="boolean"
-                            /* label="status" */
+                            label="status"
                             variant="bordered"
                             className="w-full "
                             {...register('commonName', {

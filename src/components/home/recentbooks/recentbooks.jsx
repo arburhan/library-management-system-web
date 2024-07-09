@@ -1,10 +1,8 @@
 import Title from '../../shared/title';
 import RecentbooksCard from './recentbooksCard';
 import Link from 'next/link';
-import { NavbarComponent } from '@/components/shared/navbar';
-import toast from 'react-hot-toast';
 
-const url = process.env.NEXT_PUBLIC_API_URL + `/books?limit=8&sort=-createdAt`;
+const url = process.env.NEXT_PUBLIC_API_URL + `/books?limit=8&sort=_id.desc`;
 async function getData() {
     const res = await fetch(url)
     if (!res.ok) {
@@ -12,10 +10,10 @@ async function getData() {
     }
     return res.json()
 }
-
 const Recentbooks = async ({ page = false }) => {
     const books = await getData();
     const allBooks = books.books;
+
 
 
     return (

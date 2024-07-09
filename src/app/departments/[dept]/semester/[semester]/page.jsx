@@ -1,16 +1,21 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+
 import RecentbooksCard from '@/components/home/recentbooks/recentbooksCard';
+import toast from 'react-hot-toast';
+
+const url = process.env.NEXT_PUBLIC_API_URL + `/books`;
+async function getData() {
+    const res = await fetch(url)
+    if (!res.ok) {
+        toast.error('Failed to fetch data')
+    }
+    return res.json()
+}
 
 const page = async ({ params }) => {
     const { dept, semester } = params;
-    const url = process.env.NEXT_PUBLIC_API_URL + `/books`
-    let response = await fetch(url, {
-        method: "GET"
-    });
-
-    let books = await response.json();
-    const data = books.books;
-    const filteredData = data.filter(book => book.deptName == dept && book.semester == semester);
+    const books = await getData();
+    const data = books.books.filter(book => book.deptName == dept);
 
     return (
         <div>

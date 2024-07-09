@@ -1,29 +1,10 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-
 "use client"
-import { signOut, useSession } from 'next-auth/react';
-import Link from 'next/link';
-import { redirect } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
-import { AiOutlineMenu } from 'react-icons/ai';
+import { AiOutlineMenu } from "react-icons/ai";
+import Link from "next/link";
+import { useState } from "react";
 
-const layout = ({ children }) => {
-    const { data, status } = useSession();
+export default function DashboardLayout({ children }) {
     const [isOpen, setIsOpen] = useState(false);
-
-    useEffect(() => {
-        if (status === 'loading') {
-            return;
-        }
-        if (data?.user?.role != 'librarian') {
-            redirect('/not-found');
-        }
-    }, [data, status]);
-    if (status === 'loading') {
-        return <div>Loading...</div>;
-    }
-
     const userMenu = [
         {
             _id: 1,
@@ -32,28 +13,22 @@ const layout = ({ children }) => {
         },
         {
             _id: 2,
-            name: "Add Books",
-            url: "addBooks"
+            name: "Librarians",
+            url: "librarians"
         },
         {
             _id: 3,
-            name: "Stock ou books",
-            url: "stockoutbooks"
+            name: "StockOut Books",
+            url: "stockOutBooks"
         },
         {
             _id: 4,
-            name: "All users",
-            url: "allusers"
-        },
-        {
-            _id: 5,
-            name: "Due Now",
+            name: "Due Now All Books",
             url: "duebooks"
         },
-    ];
-
+    ]
     return (
-        <section className="flex flex-col px-1 md:flex-row md:basis-1/2 h-screen bg-black">
+        <section className="flex h-screen bg-black">
             <button onClick={() => setIsOpen(!isOpen)} className="text-black text-3xl sm:hidden absolute top-0 right-0 m-6 z-30">
                 <AiOutlineMenu />
             </button>
@@ -70,20 +45,16 @@ const layout = ({ children }) => {
                     {
                         userMenu.map(menu => (
                             <li key={menu._id} className=" mx-3 mb-2 rounded-xl cursor-pointer px-6 py-2 hover:bg-[#181a1b] transition-all duration-150 active:scale-[0.98]">
-                                <Link href={`/dashboard/librarian/${menu.url}`}>
-                                    {menu.name}
-                                </Link>
+                                <Link href={`/dashboard/user/${menu.url}`} > {menu.name} </Link>
                             </li>))
                     }
                 </ul>
             </div>
-            <div className="m-2 md:ml-8" >
+            <div className="m-2 md:ml-8 md:fex" >
                 {
                     children
                 }
             </div>
         </section>
-    );
-};
-
-export default layout;
+    )
+}

@@ -20,7 +20,6 @@ const page = () => {
     const router = useRouter();
 
     const onSubmit = async data => {
-        console.log(data);
         const url = process.env.NEXT_PUBLIC_API_URL + `/user`;
         const res = await fetch(url, {
             method: "POST",
@@ -54,7 +53,7 @@ const page = () => {
                         <div>
                             <Input
                                 type="name"
-                                /* label="Name" */
+
                                 variant="bordered"
                                 className="w-full max-w-md"
                                 {...register('name', {
@@ -72,7 +71,7 @@ const page = () => {
                         <div>
                             <Input
                                 type="email"
-                                /* label="Email" */
+
                                 variant="bordered"
                                 {...register('email', {
                                     required: 'Email is required',
@@ -94,7 +93,7 @@ const page = () => {
                         <div>
                             <Input
                                 type="password"
-                                /* label="Password" */
+
                                 variant="bordered"
                                 {...register('password', {
                                     required: 'Password is required',
